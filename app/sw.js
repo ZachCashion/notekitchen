@@ -1,5 +1,5 @@
 // Bump on every change to any precached file, or installed copies keep running old code.
-const CACHE = 'nk-v1';
+const CACHE = 'nk-v2';
 
 const ASSETS = [
   './',
