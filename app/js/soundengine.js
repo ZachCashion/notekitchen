@@ -71,7 +71,15 @@ class SoundEngine {
     }
   }
 
+  // Browsers keep the AudioContext suspended until a user gesture.
+  unlock() {
+    if (Tone.context.state !== 'running') {
+      Tone.context.resume();
+    }
+  }
+
   play() {
+    this.unlock();
     this.isPlaying = true;
     if (this.sequence) {
       this.sequence.start();

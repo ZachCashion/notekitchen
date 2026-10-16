@@ -124,6 +124,7 @@ class App {
     }.bind(this);
 
     this.$input.onkeydown = function(e) {
+      this.soundEngine.unlock();
       if (e.keyCode == 38) { // UP
         e.preventDefault();
       } else if (e.keyCode == 40) { // DOWN
@@ -144,6 +145,11 @@ class App {
       this.highlightedNotes = [note];
       this.draw();
     }.bind(this);
+
+    // Shared links like ?q=C+major+play load without a gesture; start audio on the first tap.
+    document.addEventListener('pointerdown', function() {
+      this.soundEngine.unlock();
+    }.bind(this));
 
     this.$input.focus();
     this.draw();
