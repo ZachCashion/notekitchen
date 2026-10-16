@@ -36,17 +36,18 @@ body {
 }
 
 .footer {
-  position: absolute;
-  bottom: 10px;
+  position: fixed;
+  z-index: 2; // above .outer
+  bottom: calc(10px + env(safe-area-inset-bottom));
   font-size: 0.9em;
 }
 
 .footer-right {
-  right: 10px;
+  right: calc(10px + env(safe-area-inset-right));
 }
 
 .footer-left {
-  left: 10px;
+  left: calc(10px + env(safe-area-inset-left));
 }
 
 .footer a {
