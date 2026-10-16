@@ -1,49 +1,42 @@
-# Note Kichen
+# Note Kitchen
 
-Web app for visualizing piano chords and scales.
+Search for piano chords and scales, see the notes light up on a keyboard, and hear them.
 
-## Getting Started
+Type `Cm7b5`, `Fm6(b13)(#11)(+5)` or `Bb dorian`. Add `play` to loop an arpeggio, add `root` to show only the roots, and press ↑/↓ to transpose. The in-app **Help** page lists every command and the ~95 supported scales.
 
-Clone the repo and open `app/index.html`. Production site available at http://note.kitchen.
+## About this fork
 
-### Prerequisites
+Note Kitchen was built by **Nebojsa Petrovic** ([nebs](https://github.com/nebs), [Once Upon a Synth](http://onceuponasynth.tv)) and ran at note.kitchen until the domain lapsed. This fork keeps the original code and history and gets it working again:
 
-There are a few Node dependencies. Simply run `npm install` to load those up.
+- **Sound works again.** Modern browsers keep audio suspended until a user gesture, which made `play` silent (upstream [#5](https://github.com/nebs/notekitchen/issues/5)).
+- **Installable and offline.** A web app manifest, icons and a service worker let you install it on a phone or desktop and use it without a connection.
+- **No build step and no trackers.** The 2018 gulp toolchain and committed `node_modules` are gone, along with Google Analytics, the Facebook SDK and the Twitter widgets. `app/` is plain HTML/CSS/JS served as-is.
+- **Relative links.** Help-page links work from any path, not only from a domain root.
 
-### Installing
+## Running locally
 
-1. Run `npm install`
-2. Develop inside the `/app` directory.
-3. Run `gulp sass` to compile scss to css.
+On Windows, with nothing to install (or `npm start` if you have Node):
 
-## Running the tests
+```bash
+powershell -ExecutionPolicy Bypass -File serve.ps1
+```
 
-Open `specs/specs.html` in the browser to run the Jasmine tests.
+Then open http://localhost:8080/app/. Any static server pointed at the repo root works too (for example `npx http-server -c-1 .`). A server is needed rather than opening the file directly, because service workers do not run on `file://`.
 
-### Writing tests
+## Tests
 
-To write tests for `foo.js` add specs to `specs/specs/foospec.js`
+With the server running, open http://localhost:8080/specs/specs.html to run the Jasmine specs.
 
-## Deployment
+## Making changes
 
-1. Run `gulp build`.
-2. The production code will be available in a new `dist` folder.
+- After changing any file under `app/`, bump `CACHE` in `app/sw.js` (`nk-v1` → `nk-v2`). Otherwise installed copies keep serving the old files.
+- To regenerate the icons, run `powershell -ExecutionPolicy Bypass -File tools/make-icons.ps1`.
 
-## Built With
+## Built with
 
-* [Tone.js](https://tonejs.github.io/) - For playing sounds
-* [Gulp](https://gulpjs.com/) - For workflow automation
-* [Jasmine](https://jasmine.github.io/) - For testing
-
-## Contributing
-
-If you have a bug fix feel free to submit a PR.
-For features, please look at the open Issues or contact me first with ideas. I will likely reject feature PRs unless I approved the feature ahead of time. I'm trying to keep the UI as simple as possible. Thank you!
-
-## Authors
-
-* **Nebojsa Petrovic** - *Initial work* - [nebs](https://github.com/nebs) aka [Once Upon a Synth](http://onceuponasynth.tv)
+- [Tone.js](https://tonejs.github.io/) (r11, vendored) for sound
+- [Jasmine](https://jasmine.github.io/) for tests
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+MIT, see [LICENSE.md](LICENSE.md). Original work © 2018 Nebojsa Petrovic.
