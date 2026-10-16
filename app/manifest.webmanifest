@@ -1,0 +1,15 @@
+{
+  "name": "Note Kitchen - Piano Chords and Scales",
+  "short_name": "Note Kitchen",
+  "description": "Search for music chords and scales, see the notes on a piano keyboard and hear what they sound like.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#7CBFDA",
+  "theme_color": "#7CBFDA",
+  "icons": [
+    { "src": "images/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "images/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "images/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

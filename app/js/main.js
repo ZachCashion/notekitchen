@@ -24,4 +24,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
     parser,
     settings);
   app.start();
+
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js', { updateViaCache: 'none' });
+  }
 });
