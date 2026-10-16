@@ -4,7 +4,7 @@
   "description": "Search for piano chords and scales, see them on a keyboard and hear them.",
   "private": true,
   "scripts": {
-    "start": "npx --yes http-server@14.1.1 -c-1 -p 8080 ."
+    "start": "powershell -NoProfile -ExecutionPolicy Bypass -File serve.ps1"
   },
   "repository": {
     "type": "git",

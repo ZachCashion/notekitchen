@@ -9,17 +9,18 @@ describe("App", function() {
     let app;
 
 	beforeEach(function() {
-       $input  document.createElement("div"); 
+       $input = document.createElement("input");
 	   parser = new Parser();
-	   settings = new Settings();		
+	   settings = new Settings();
 	   noteEngine = new NoteEngine(parser);
 	   chordEngine = new ChordEngine(parser);
-	   scaleEngine = new ScaleEngine(parser);	
+	   scaleEngine = new ScaleEngine(parser);
 	   commandEngine = new CommandEngine(settings);
-	   app = new App($input, 
+	   app = new App($input,
                      null,
                      null,
-                     noteEngine, 
+                     null,
+                     noteEngine,
                      chordEngine, 
                      scaleEngine, 
                      commandEngine, 
@@ -50,7 +51,7 @@ describe("App", function() {
         
 		describe("when the query is null", function() {
 			it("returns null", function() {
-                expect(app.process(null)).toBeNull
+                expect(app.process(null)).toBeNull();
 			});
 		});        
     });
