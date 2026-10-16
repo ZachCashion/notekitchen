@@ -65,8 +65,11 @@ class PianoView {
     document.body.classList = '';
     document.body.classList.add(this.settings.activeTheme().cssClass);
 
-    const canvasW = window.innerWidth;
-    const canvasH = window.innerHeight;
+    // Size to the layout viewport, the same box the input is centered in. On iOS,
+    // innerHeight shrinks while the keyboard is open, so the first redraw after
+    // typing would center the piano higher than the input.
+    const canvasW = document.documentElement.clientWidth;
+    const canvasH = document.documentElement.clientHeight;
     const pianoW = 300;
     const pianoH = 80;
     const pianoX = (canvasW / 2) - (pianoW / 2);
