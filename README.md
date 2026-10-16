@@ -2,6 +2,8 @@
 
 Search for piano chords and scales, see the notes light up on a keyboard, and hear them.
 
+**Live:** https://zachcashion.github.io/notekitchen/
+
 Type `Cm7b5`, `Fm6(b13)(#11)(+5)` or `Bb dorian`. Add `play` to loop an arpeggio, add `root` to show only the roots, and press ↑/↓ to transpose. The in-app **Help** page lists every command and the ~95 supported scales.
 
 ## About this fork
@@ -26,6 +28,10 @@ Then open http://localhost:8080/app/. Any static server pointed at the repo root
 ## Tests
 
 With the server running, open http://localhost:8080/specs/specs.html to run the Jasmine specs.
+
+## Deployment
+
+Every push to `master` publishes `app/` to GitHub Pages (`.github/workflows/pages.yml`) and smoke-tests the live site. One-time setup: in the repo's **Settings > Pages**, set **Source** to **GitHub Actions**.
 
 ## Making changes
 
