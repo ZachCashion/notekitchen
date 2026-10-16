@@ -1,0 +1,49 @@
+# Publishes app/ to GitHub Pages on every push to master.
+# One-time setup: repo Settings > Pages > Source: "GitHub Actions".
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: app
+
+      - id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: Smoke test
+        env:
+          PAGE_URL: ${{ steps.deployment.outputs.page_url }}
+        run: |
+          for path in "" "help.html" "sw.js" "manifest.webmanifest" "js/lib/Tone.js"; do
+            for attempt in 1 2 3 4 5 6; do
+              status=$(curl -s -o /dev/null -w '%{http_code}' "${PAGE_URL}${path}")
+              [ "$status" = "200" ] && break
+              sleep 10
+            done
+            echo "${PAGE_URL}${path} -> $status"
+            [ "$status" = "200" ] || exit 1
+          done
